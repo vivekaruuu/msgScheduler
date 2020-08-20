@@ -12,6 +12,7 @@ public class receiver extends BroadcastReceiver {
     private static final String TAG = "receiver";
     @Override
     public void onReceive(Context context, Intent intent) {
+        Log.d(TAG, "onReceive: ");
         String number=intent.getStringExtra("number");
         String msg=intent.getStringExtra("msg");
 

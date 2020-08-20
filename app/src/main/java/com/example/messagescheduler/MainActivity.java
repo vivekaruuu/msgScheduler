@@ -95,14 +95,14 @@ public class MainActivity extends AppCompatActivity {
         AlarmManager alarmManager= (AlarmManager) getSystemService(Context.ALARM_SERVICE);
         msg = msgBox.getText().toString();
         number = inputBox.getText().toString();
-        Intent intent=new Intent(getApplicationContext(), receiver.class);
+        Intent intent=new Intent(this, receiver.class);
         intent.putExtra("number", number);
         intent.putExtra("msg", msg);
 
       //  intent.addFlags(FLAG_INCLUDE_STOPPED_PACKAGES);
-        PendingIntent pendingIntent=PendingIntent.getBroadcast(getApplicationContext(),2,intent,PendingIntent.FLAG_CANCEL_CURRENT);
+        PendingIntent pendingIntent=PendingIntent.getBroadcast(this,1,intent,0);
         Log.d(TAG, "scheduleSms:"+ intent.getStringExtra("msg"));
-        alarmManager.setExact(AlarmManager.RTC_WAKEUP,timeInMillis,pendingIntent);
+        alarmManager.setExact(AlarmManager.RTC,timeInMillis,pendingIntent);
 
     }
 
@@ -143,6 +143,7 @@ public class MainActivity extends AppCompatActivity {
             public void onTimeSet(TimePicker timePicker, int hour, int minute) {
                 mCalendar.set(Calendar.HOUR, hour);
                 mCalendar.set(Calendar.MINUTE, minute);
+                mCalendar.set(Calendar.SECOND,0);
                 String dateText = DateFormat.format("h:mm a", mCalendar).toString();
                 timeButton.setText(dateText);
             }
